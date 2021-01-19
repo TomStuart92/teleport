@@ -31,7 +31,7 @@ import (
 	"github.com/gravitational/trace"
 )
 
-// onListDatabases handles "tsh db ls" command.
+// onListDatabases implements "tsh db ls" command.
 func onListDatabases(cf *CLIConf) {
 	tc, err := makeClient(cf, false)
 	if err != nil {
@@ -61,7 +61,7 @@ func onListDatabases(cf *CLIConf) {
 	showDatabases(tc.SiteName, servers, profile.Databases, cf.Verbose)
 }
 
-// onDatabaseLogin handles "tsh db login" command.
+// onDatabaseLogin implements "tsh db login" command.
 func onDatabaseLogin(cf *CLIConf) {
 	tc, err := makeClient(cf, false)
 	if err != nil {
@@ -145,7 +145,7 @@ func fetchDatabaseCreds(cf *CLIConf, tc *client.TeleportClient) error {
 	return nil
 }
 
-// onDatabaseLogout handles "tsh db logout" command.
+// onDatabaseLogout implements "tsh db logout" command.
 func onDatabaseLogout(cf *CLIConf) {
 	tc, err := makeClient(cf, false)
 	if err != nil {
@@ -196,7 +196,7 @@ func databaseLogout(tc *client.TeleportClient, db tlsca.RouteToDatabase) error {
 	return nil
 }
 
-// onDatabaseEnv handles "tsh db env" command.
+// onDatabaseEnv implements "tsh db env" command.
 func onDatabaseEnv(cf *CLIConf) {
 	tc, err := makeClient(cf, false)
 	if err != nil {
@@ -215,7 +215,7 @@ func onDatabaseEnv(cf *CLIConf) {
 	}
 }
 
-// onDatabaseConfig handles "tsh db config" command.
+// onDatabaseConfig implements "tsh db config" command.
 func onDatabaseConfig(cf *CLIConf) {
 	tc, err := makeClient(cf, false)
 	if err != nil {
