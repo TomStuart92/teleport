@@ -54,8 +54,8 @@ IAM authentication.
 
 If you don't have a database provisioned yet, create an instance of an Aurora
 PostgreSQL instance in the [RDS control panel](https://console.aws.amazon.com/rds/home).
-Make sure to enable "Password and IAM database authentication" in the Database
-Authentication dialog.
+Make sure to choose "Standard create" database creation method and enable
+"Password and IAM database authentication" in the Database Authentication dialog.
 
 For existing Aurora instances, the status of IAM authentication is displayed on
 the Configuration tab and can be enabled by modifying the database instance.
@@ -73,20 +73,30 @@ Teleport process will be using to allow it to connect to the database:
              "rds-db:connect"
          ],
          "Resource": [
-             "arn:aws:rds-db:<region>:<account-id>:dbuser:<db-cluster-resource-id>/*"
+             "arn:aws:rds-db:<region>:<account-id>:dbuser:<resource-id>/*"
          ]
       }
    ]
 }
 ```
 
+!!! note "Resource ID"
+    Database resource ID is shown on the Configuration tab of a particular
+    database instance in RDS control panel, under "Resource id". For regular
+    RDS database it starts with `db-` prefix. For Aurora use database cluster
+    resource ID (`cluster-`), not individual instance ID.
+
 Finally, connect to the database and create a database account with IAM auth
-support (or update an existing one):
+support (or update an existing one). Once connected, execute the following
+SQL statements to create a new database account and allow IAM auth for it:
 
 ```sql
 CREATE USER alice;
 GRANT rds_iam TO alice;
 ```
+
+For more information about connecting to the PostgreSQL instance directly,
+see Amazon [documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ConnectToPostgreSQLInstance.html).
 
 See a more detailed description of these steps in the [reference](#aws-rdsaurora-postgresql) below.
 
