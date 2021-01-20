@@ -136,13 +136,13 @@ sudo tctl users add alice root \
 Now that Aurora is configured with IAM authentication, Teleport is running and
 the local user is created, we're ready to connect to the database.
 
-Log into Teleport with the user we've just created.
+Log into Teleport with the user we've just created. Make sure to use `tsh`
+version `6.0.0-alpha.1` or newer that includes Database Access support.
 
-!!! note "Teleport certificate"
-    For simplicity, we're using an `--insecure` flag to accept Teleport's
-    self-signed certificate. For production usage make sure to configure proxy
-    with a proper certificate/key pair. See Teleport's general
-    [quickstart guide](../quickstart.md#step-1c-configure-domain-name-and-obtain-tls-certificates-using-lets-encrypt).
+For simplicity, we're using an `--insecure` flag to accept Teleport's
+self-signed certificate. For production usage make sure to configure proxy
+with a proper certificate/key pair. See Teleport's general
+[quickstart guide](../quickstart.md#step-1c-configure-domain-name-and-obtain-tls-certificates-using-lets-encrypt).
 
 ```shell
 tsh login --insecure --proxy=localhost:3080 --user=alice
